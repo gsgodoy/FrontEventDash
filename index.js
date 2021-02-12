@@ -23,8 +23,11 @@ function logar() {
 }
 
 function trataResposta(resposta) {
-    if (resposta.status == 200) {
-        resposta.json().then(usuario => console.log(usuario));
+    if (resposta.status == 200) { //se retornar
+        resposta.json().then(usuario => {
+            localStorage.setItem("userDASH", JSON.stringify(usuario));  //armazenar o objeto usuario no cache local
+            window.location = "relatorio.html";                        //redireciono para outra pagina
+        });
     }
     else if (resposta.status == 401) {
         document.getElementById("msg").innerHTML = "Senha Inválida!";
